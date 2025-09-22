@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Le Jeu de l’Amour 💖</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Menu déroulant -->
+  <nav class="menu-deroulant">
+    <button class="menu-btn" aria-expanded="false">Menu ⬇️</button>
+    <div class="menu-content" role="menu">
+      <a href="index.html">Accueil</a>
+      <a href="galerie.html">Galerie</a>
+      <a href="timeline.html">Timeline</a>
+      <a href="jeu.html">Jeu</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Attrape les cœurs 💕</h1>
+    <p>Déplace la boîte avec les flèches ⬅️ ➡️ et attrape les cœurs qui tombent. ✨</p>
+
+    <div id="game-area">
+      <div id="player"></div>
+      <div id="score">Score : 0</div>
+    </div>
+
+    <div id="win-message" class="hidden">
+      🎉 Bravo Miminella 🐵💖 !  
+      Tu as gagné tout l’amour de MimiAaron 💕 !
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
