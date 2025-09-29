@@ -1,74 +1,92 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Timeline 💖</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="description" content="Notre timeline d'amour">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-  <!-- Menu déroulant -->
-  <nav class="menu-deroulant">
-    <button class="menu-btn" aria-expanded="false">Menu ⬇️</button>
-    <div class="menu-content" role="menu">
-      <a href="index.html">Accueil</a>
-      <a href="galerie.html">Galerie</a>
-      <a href="timeline.html">Timeline</a>
-      <a href="jeu.html">Jeu</a>
+  <div class="particles-bg" aria-hidden="true"></div>
+  
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">Miminella 💖</div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="galerie.html" class="nav-link">Galerie</a>
+        <a href="timeline.html" class="nav-link active">Timeline</a>
+        <a href="jeu.html" class="nav-link">Jeux</a>
+        <a href="blog.html" class="nav-link active">Blog</a>
+      </div>
     </div>
   </nav>
 
-  <div class="container">
-    <h1>Notre histoire 💖</h1>
-    <p class="intro-text">
-      Voici les moments clés de notre histoire, Miminella 🐵💕.
-    </p>
+  <button id="theme-toggle" class="theme-btn" aria-label="Changer le thème">
+    <span class="theme-icon">🌙</span>
+  </button>
 
-    <div class="timeline">
+  <main style="padding-top: 100px; min-height: 100vh;">
+    <div class="container">
+      <div class="hero-content" style="max-width: 900px;">
+        <h1 class="hero-title">Notre histoire 💖</h1>
+        <p class="hero-subtitle">
+          Voici les moments clés de notre histoire, Miminella 🐵💕
+        </p>
 
-      <div class="timeline-event">
-        <div class="date">5-15 avril 2025</div>
-        <div class="content">
-          <h3>Toute première fois qu'on se voit.</h3>
-          <p>Le jour où tout a commencé, on n'aurait jamais su qu'on serait ensemble un jour, tu me faisais des petites critiques du type je patine comme un lacoste TN et je rigolais 💖.</p>
+        <div class="timeline">
+          <div class="timeline-event">
+            <div class="timeline-content">
+              <div class="date">5-15 avril 2025</div>
+              <h3>Toute première fois qu'on se voit</h3>
+              <p>Le jour où tout a commencé, on n'aurait jamais su qu'on serait ensemble un jour, tu me faisais des petites critiques du type je patine comme un lacoste TN et je rigolais 💖</p>
+            </div>
+          </div>
+
+          <div class="timeline-event">
+            <div class="timeline-content">
+              <div class="date">24 avril 2025</div>
+              <h3>Début de notre histoire, alias notre premier bisou 💖</h3>
+              <p>Ce jour-là est unique, c'est le jour où tout a commencé entre nous, et mon cœur a choisi toi, a choisi Miminella 🐵💕</p>
+            </div>
+          </div>
+
+          <div class="timeline-event">
+            <div class="timeline-content">
+              <div class="date">Été 2025</div>
+              <h3>Notre premier été ensemble 🥵</h3>
+              <p>Cet été a réellement été un des meilleurs étés, si ce n'est le meilleur été que j'aie passé, j'étais tous les jours avec toi et tout se passait bien. Hâte d'être au prochain été, et toujours avec toi 💖</p>
+            </div>
+          </div>
+
+          <div class="timeline-event">
+            <div class="timeline-content">
+              <div class="date">27 août 2025</div>
+              <h3>Mon départ au Canada 😥</h3>
+              <p>Depuis le moment où je suis parti, tu me manques, chaque jour qui passe, mon envie de te revoir est de plus en plus grande. J'ai hâte de te revoir ma chérie 🐵💕</p>
+            </div>
+          </div>
+
+          <div class="timeline-event">
+            <div class="timeline-content">
+              <div class="date">24 décembre 2025</div>
+              <h3>Notre prochain rendez-vous et premier Noël 😁</h3>
+              <p>Nous nous reverrons pour célébrer ensemble notre premier Noël, pas pour longtemps mais assez pour qu'il reste gravé dans le cœur une fois qu'on y sera ! ✨🎄</p>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="timeline-event">
-        <div class="date">24 avril 2025</div>
-        <div class="content">
-          <h3>Début de notre histoire, alias notre premier bisous💖</h3>
-          <p>Ce jour-là est unique, c'est le jour où tout a commencé entre nous, et mon coeur a choisi toi, a choisi Miminella 🐵💕.</p>
-        </div>
-      </div>
-
-      <div class="timeline-event">
-        <div class="date">été 2025</div>
-        <div class="content">
-          <h3>Notre premier été ensemble 🥵!</h3>
-          <p>Cet été a réellement été une des meilleurs étés, si ce n'est le meilleur été que j'aie passé, j'étais tous les jours avec toi et tout se passait bien. Hâte d'être au prochain été, et toujours avec toi eheh 💖</p>
-        </div>
-      </div>
-
-      <div class="timeline-event">
-        <div class="date">27 aout 2025</div>
-        <div class="content">
-          <h3>Mon départ au canada 😥</h3>
-          <p>Depuis le moment ou je suis parti, tu me manques, chaque jour qui passe, mon envie de te revoir est de plus en plus grande. J'ai hâte de te revoir ma chérie 🐵💕 </p>
-        </div>
-      </div>
-      
-      <div class="timeline-event">
-        <div class="date">24 décembre 2025</div>
-        <div class="content">
-          <h3>Notre prochain rendez-vous et premier noël 😁</h3>
-          <p>Nous nous reverrons pour célébrer ensemble notre premier Noël, pas pour longtemps mais assez pour qu'il reste gravé dans le cœur une fois qu'on y sera ! ✨🎄.</p>
-        </div>
-      </div>
-
     </div>
-  </div>
+  </main>
 
   <script src="js/script.js"></script>
 </body>

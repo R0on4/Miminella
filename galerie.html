@@ -1,50 +1,67 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Galerie 💖</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="description" content="Galerie de notre histoire d'amour">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-  <!-- Menu déroulant -->
-  <nav class="menu-deroulant">
-    <button class="menu-btn" aria-expanded="false">Menu ⬇️</button>
-    <div class="menu-content" role="menu">
-      <a href="index.html">Accueil</a>
-      <a href="galerie.html">Galerie</a>
-      <a href="timeline.html">Timeline</a>
-      <a href="jeu.html">Jeu</a>
+  <div class="particles-bg" aria-hidden="true"></div>
+  
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">Miminella 💖</div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="galerie.html" class="nav-link active">Galerie</a>
+        <a href="timeline.html" class="nav-link">Timeline</a>
+        <a href="jeu.html" class="nav-link">Jeux</a>
+        <a href="blog.html" class="nav-link active">Blog</a>
+      </div>
     </div>
   </nav>
 
-  <div class="container">
-    <h1>Notre galerie 💕</h1>
-    <p class="intro-text">
-      Voici quelques-uns de nos plus beaux souvenirs, Miminella 🐵💖.
-    </p>
+  <button id="theme-toggle" class="theme-btn" aria-label="Changer le thème">
+    <span class="theme-icon">🌙</span>
+  </button>
 
-    <div class="gallery">
-      <img src="img/photo1.PNG" alt="Souvenir 1" />
-      <img src="img/photo2.jpg" alt="Souvenir 2" />
-      <img src="img/photo3.PNG" alt="Souvenir 3" />
-      <img src="img/photo4.JPG" alt="Souvenir 4" />
-      <img src="img/HXWQ1357.PNG" alt="Souvenir 5" />
-      <img src="img/INKY0455.PNG" alt="Souvenir 4" />
-      <img src="img/JBBB9874.PNG" alt="Souvenir 4" />
-      <img src="img/TPEJ2856.PNG" alt="Souvenir 4" />
-      <img src="img/SFKH3318.PNG" alt="Souvenir 4" />
-      <img src="img/PLXU5419.PNG" alt="Souvenir 4" />
+  <main style="padding-top: 100px;">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Notre galerie 💕</h1>
+        <p class="hero-subtitle">
+          Voici quelques-uns de nos plus beaux souvenirs, Miminella 🐵💖
+        </p>
 
-
+        <div class="gallery">
+          <img src="img/photo1.PNG" alt="Souvenir 1">
+          <img src="img/photo2.jpg" alt="Souvenir 2">
+          <img src="img/photo3.PNG" alt="Souvenir 3">
+          <img src="img/photo4.JPG" alt="Souvenir 4">
+          <img src="img/HXWQ1357.PNG" alt="Souvenir 5">
+          <img src="img/INKY0455.PNG" alt="Souvenir 6">
+          <img src="img/JBBB9874.PNG" alt="Souvenir 7">
+          <img src="img/TPEJ2856.PNG" alt="Souvenir 8">
+          <img src="img/SFKH3318.PNG" alt="Souvenir 9">
+          <img src="img/PLXU5419.PNG" alt="Souvenir 10">
+        </div>
+      </div>
     </div>
-  </div>
+  </main>
 
-  <!-- Lightbox -->
   <div id="lightbox" class="lightbox hidden">
     <span class="close">&times;</span>
-    <img id="lightbox-img" src="" alt="Agrandissement" />
+    <img id="lightbox-img" src="" alt="Agrandissement">
   </div>
 
   <script src="js/script.js"></script>

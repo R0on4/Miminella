@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Notre Blog 💭</title>
+  <meta name="description" content="Blog, rêves et pensées">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="particles-bg" aria-hidden="true"></div>
+  
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">Miminella 💖</div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="galerie.html" class="nav-link">Galerie</a>
+        <a href="timeline.html" class="nav-link">Timeline</a>
+        <a href="jeu.html" class="nav-link">Jeux</a>
+        <a href="blog.html" class="nav-link active">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <button id="theme-toggle" class="theme-btn" aria-label="Changer le thème">
+    <span class="theme-icon">🌙</span>
+  </button>
+
+  <main style="padding-top: 100px; min-height: 100vh;">
+    <div class="container">
+      <!-- Citation du jour -->
+      <div class="daily-quote">
+        <p class="daily-quote-text" id="daily-quote-text">Chargement...</p>
+        <button class="quote-refresh" onclick="refreshQuote()">Nouvelle citation ✨</button>
+      </div>
+
+      <!-- Nos rêves -->
+      <div class="hero-content" style="margin-top: 3rem;">
+        <h1 class="hero-title">Nos Rêves 🌟</h1>
+        <p class="hero-subtitle">
+          Tout ce qu'on veut accomplir ensemble, nos projets et nos souhaits pour l'avenir
+        </p>
+
+        <div class="dreams-grid">
+          <div class="dream-card" style="animation-delay: 0.1s;">
+            <div class="dream-icon">🏠</div>
+            <h3 class="dream-title">Notre maison</h3>
+            <p class="dream-description">
+              Avoir notre propre petit nid douillet où on pourra créer plein de souvenirs ensemble
+            </p>
+          </div>
+
+          <div class="dream-card" style="animation-delay: 0.2s;">
+            <div class="dream-icon">✈️</div>
+            <h3 class="dream-title">Voyager ensemble</h3>
+            <p class="dream-description">
+              Découvrir le monde main dans la main, visiter le Japon, l'Italie, et plein d'autres endroits magiques
+            </p>
+          </div>
+
+          <div class="dream-card" style="animation-delay: 0.3s;">
+            <div class="dream-icon">👶</div>
+            <h3 class="dream-title">Fonder une famille</h3>
+            <p class="dream-description">
+              Avoir des petits Monchhichis à nous et leur transmettre tout notre amour
+            </p>
+          </div>
+
+          <div class="dream-card" style="animation-delay: 0.4s;">
+            <div class="dream-icon">🎓</div>
+            <h3 class="dream-title">Réussir nos études</h3>
+            <p class="dream-description">
+              Se soutenir mutuellement pour atteindre nos objectifs professionnels et construire notre avenir
+            </p>
+          </div>
+
+          <div class="dream-card" style="animation-delay: 0.5s;">
+            <div class="dream-icon">🐕</div>
+            <h3 class="dream-title">Adopter un animal</h3>
+            <p class="dream-description">
+              Avoir un petit chien ou un chat qui complètera notre petite famille parfaite
+            </p>
+          </div>
+
+          <div class="dream-card" style="animation-delay: 0.6s;">
+            <div class="dream-icon">💍</div>
+            <h3 class="dream-title">Notre mariage</h3>
+            <p class="dream-description">
+              Le plus beau jour de notre vie, entourés de ceux qu'on aime, pour célébrer notre amour éternel
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+  <script src="js/blog.js"></script>
+</body>
+</html>
