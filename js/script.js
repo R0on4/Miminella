@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const codeBtn = document.getElementById('code-secret-btn');
   if (codeBtn) {
     codeBtn.addEventListener('click', () => {
-      const code = prompt('💝 Indice : C\'est notre sentiment + l\'année où tout a commencé\n');
+      const code = prompt('💝 Indice : C\'est notre sentiment + l\'année où tout a commencé\n(en anglais, tout en minuscules, sans espace)\nExemple : mot2025\n');
       if (code && code.toLowerCase() === 'love2025') {
         window.location.href = 'secret2.html';
       } else if (code) {
@@ -80,7 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // TIMERS
-  const dateDebut = new Date('2025-04-24T00:00:00+01:00');
+  // Date de début en heure de Paris (France)
+  const dateDebut = new Date('2025-04-24T00:00:00+02:00'); // +02:00 = heure d'été à Paris
   const prochainEvent = { month: 12, day: 24, hour: 0, minute: 0 };
   const ornellaBirthday = { month: 10, day: 25, hour: 0, minute: 0 };
   const aaronBirthday = { month: 2, day: 26, hour: 0, minute: 0 };
@@ -185,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const jeux = [
     { id: 'game-area', label: 'Attrape-cœurs 💖' },
     { id: 'quiz-game', label: 'Quiz d\'amour 💘' },
-    { id: 'song-game', label: 'Devine la chanson 🎵' },
+    { id: 'puzzle-game', label: 'Puzzle d\'amour 🧩' },
     { id: 'memory-game', label: 'Memory cœur 🧠' }
   ];
 
@@ -208,9 +209,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       // Initialiser le jeu sélectionné
-      if (this.value === 'quiz-game') initQuizGame();
-      if (this.value === 'song-game') initSongGame();
-      if (this.value === 'memory-game') initMemoryGame();
+      if (this.value === 'quiz-game') {
+        initQuizGame();
+      } else if (this.value === 'puzzle-game') {
+        initPuzzleGame();
+      } else if (this.value === 'memory-game') {
+        initMemoryGame();
+      }
     });
 
     // Afficher le premier jeu par défaut
@@ -584,4 +589,26 @@ Ton MimiAaron 💕`;
       particlesBg.appendChild(particle);
     }
   }
+
+  // Bouton retour en haut
+  const backToTopBtn = document.createElement('button');
+  backToTopBtn.className = 'back-to-top';
+  backToTopBtn.innerHTML = '↑';
+  backToTopBtn.setAttribute('aria-label', 'Retour en haut');
+  document.body.appendChild(backToTopBtn);
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
+  });
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
 });
