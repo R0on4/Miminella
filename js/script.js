@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const codeBtn = document.getElementById('code-secret-btn');
   if (codeBtn) {
     codeBtn.addEventListener('click', () => {
-      const code = prompt('💝 Indice : C\'est notre sentiment + l\'année où tout a commencé\n(en anglais, tout en minuscules, sans espace)\nExemple : mot2025');
+      const code = prompt('💝 Indice : C\'est notre sentiment + l\'année où tout a commencé\n');
       if (code && code.toLowerCase() === 'love2025') {
         window.location.href = 'secret2.html';
       } else if (code) {
