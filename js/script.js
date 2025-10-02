@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const codeBtn = document.getElementById('code-secret-btn');
   if (codeBtn) {
     codeBtn.addEventListener('click', () => {
-      const code = prompt('💝 Indice : Evenement recent ou tu a beaucoup stresser (jj/mm/aa) \n');
+      const code = prompt('💝 Indice : Evenement recent ou tu a beaucoup stresser (jjmmaa) \n');
       if (code && code.toLowerCase() === '310725') {
         window.location.href = 'secret2.html';
       } else if (code) {
