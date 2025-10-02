@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Notre Playlist 🎵</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .playlist-container {
+      max-width: 900px;
+      margin: 2rem auto;
+    }
+
+    .spotify-embed-container {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 2rem;
+    }
+
+    .embed-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5rem;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .spotify-player {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .instructions-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .instructions-card h3 {
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .step {
+      background: var(--bg-glass);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border-left: 4px solid var(--accent);
+      transition: all 0.3s ease;
+    }
+
+    .step:hover {
+      transform: translateX(5px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .step-number {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 30px;
+      font-weight: 700;
+      margin-right: 1rem;
+    }
+
+    .step-content {
+      display: inline-block;
+      vertical-align: top;
+      width: calc(100% - 50px);
+    }
+
+    .step strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .code-block {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 1rem;
+      border-radius: 10px;
+      margin: 1rem 0;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    .tip-box {
+      background: linear-gradient(135deg, var(--accent), var(--gradient-2));
+      color: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .tip-box strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .feature-item {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--bg-glass);
+      border-radius: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-item h4 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .alternative-services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-5px);
+    }
+
+    .service-logo {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h4 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="particles-bg" aria-hidden="true"></div>
+  
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">Miminella 💖</div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="galerie.html" class="nav-link">Galerie</a>
+        <a href="timeline.html" class="nav-link">Timeline</a>
+        <a href="jeu.html" class="nav-link">Jeux</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="roulette-mots.html" class="nav-link">Roulette Mots</a>
+        <a href="roulette-defis.html" class="nav-link">Défis</a>
+        <a href="wishlist.html" class="nav-link">Wishlist</a>
+        <a href="playlist.html" class="nav-link active">Playlist</a>
+      </div>
+    </div>
+  </nav>
+
+  <button id="theme-toggle" class="theme-btn" aria-label="Changer le thème">
+    <span class="theme-icon">🌙</span>
+  </button>
+
+  <main style="padding-top: 100px; min-height: 100vh;">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Notre Playlist 🎵</h1>
+        <p class="hero-subtitle">
+          Les chansons qui nous rappellent nos plus beaux souvenirs 💖
+        </p>
+
+        <div class="playlist-container">
+          <div class="spotify-embed-container">
+            <h2 class="embed-title">Écoute notre playlist ✨</h2>
+            
+            <!-- Remplace l'URL par ta playlist Spotify -->
+            <iframe 
+              class="spotify-player"
+              style="border-radius:12px" 
+              src="https://open.spotify.com/embed/playlist/6yEbvQo0oSxsFeLn15wrFH?utm_source=generator" 
+              width="100%" 
+              height="450" 
+              frameBorder="0" 
+              allowfullscreen="" 
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+              loading="lazy">
+            </iframe>
+
+            <div class="features-grid">
+              <div class="feature-item">
+                <div class="feature-icon">🎧</div>
+                <h4>Écoute directe</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Écoute sans quitter le site</p>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">🔄</div>
+                <h4>Auto-update</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Nouvelles chansons apparaissent automatiquement</p>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">💕</div>
+                <h4>Partagée</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Vous pouvez tous les deux ajouter des sons</p>
+              </div>
+            </div>
+          </div>
+
+            <div class="tip-box">
+              <strong>💡 Astuce Pro</strong>
+              <p>Assure-toi que ta playlist soit publique pour que l'intégration fonctionne ! 
+              Tu peux aussi créer une playlist collaborative pour que vous puissiez tous les deux y ajouter des chansons.</p>
+            </div>
+          </div>
+
+          <div class="instructions-card">
+            <h3>🎼 Autres services de streaming</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+              Tu peux aussi utiliser d'autres plateformes :
+            </p>
+
+            <div class="alternative-services">
+              <div class="service-card">
+                <div class="service-logo">🎵</div>
+                <h4>Apple Music</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Utilise leur système d'embed similaire</p>
+              </div>
+
+              <div class="service-card">
+                <div class="service-logo">▶️</div>
+                <h4>YouTube Music</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Intègre des playlists YouTube</p>
+              </div>
+
+              <div class="service-card">
+                <div class="service-logo">🎧</div>
+                <h4>SoundCloud</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Parfait pour du contenu original</p>
+              </div>
+
+              <div class="service-card">
+                <div class="service-logo">🌊</div>
+                <h4>Deezer</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Alternative européenne</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem; padding: 2rem; background: var(--bg-card); border-radius: 20px; text-align: center;">
+            <h4 style="color: var(--accent); margin-bottom: 1rem;">Pourquoi Spotify ? 🎵</h4>
+            <ul style="list-style: none; padding: 0; color: var(--text-secondary); line-height: 2;">
+              <li>✅ Se met à jour automatiquement quand tu ajoutes des chansons</li>
+              <li>✅ Affiche les dernières chansons ajoutées</li>
+              <li>✅ Playlist collaborative pour ajouter des sons à deux</li>
+              <li>✅ Gratuit avec un compte Spotify</li>
+              <li>✅ Fonctionne sur mobile, tablette et ordinateur</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

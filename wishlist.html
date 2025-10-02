@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Wishlist 🌟</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .wishlist-intro {
+      text-align: center;
+      margin: 2rem 0;
+      padding: 2rem;
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .wishlist-intro h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .wishlist-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .action-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      border: 3px solid transparent;
+    }
+
+    .action-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent);
+    }
+
+    .action-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .action-card h3 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .action-card p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .action-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      width: 100%;
+    }
+
+    .action-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .action-btn.secondary {
+      background: var(--text-secondary);
+    }
+
+    .action-btn.secondary:hover {
+      background: var(--text-primary);
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, var(--accent), var(--gradient-2));
+      color: white;
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: var(--shadow-md);
+    }
+
+    .info-box h4 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .info-box li {
+      padding: 0.5rem 0;
+      padding-left: 2rem;
+      position: relative;
+    }
+
+    .info-box li::before {
+      content: '✨';
+      position: absolute;
+      left: 0;
+    }
+
+    .examples-section {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: var(--bg-card);
+      border-radius: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .examples-section h3 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .example-item {
+      background: var(--bg-glass);
+      padding: 1.5rem;
+      border-radius: 15px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .example-item strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="particles-bg" aria-hidden="true"></div>
+  
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">Miminella 💖</div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="galerie.html" class="nav-link">Galerie</a>
+        <a href="timeline.html" class="nav-link">Timeline</a>
+        <a href="jeu.html" class="nav-link">Jeux</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="roulette-mots.html" class="nav-link">Roulette Mots</a>
+        <a href="roulette-defis.html" class="nav-link">Défis</a>
+        <a href="wishlist.html" class="nav-link active">Wishlist</a>
+        <a href="playlist.html" class="nav-link">Playlist</a>
+      </div>
+    </div>
+  </nav>
+
+  <button id="theme-toggle" class="theme-btn" aria-label="Changer le thème">
+    <span class="theme-icon">🌙</span>
+  </button>
+
+  <main style="padding-top: 100px; min-height: 100vh;">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Notre Wishlist Partagée 🌟</h1>
+        <p class="hero-subtitle">
+          Partage tes envies, rêves et souhaits ! On pourra les réaliser ensemble 💖
+        </p>
+
+        <div class="wishlist-intro">
+          <h2>Comment ça marche ? ✨</h2>
+          <p style="color: var(--text-secondary); line-height: 1.8; max-width: 700px; margin: 0 auto;">
+            C'est simple ! Ajoute ce que tu souhaites en remplissant le formulaire, 
+            puis consulte la liste commune pour voir tous nos souhaits réunis au même endroit.
+          </p>
+        </div>
+
+        <div class="wishlist-actions">
+          <div class="action-card">
+            <span class="action-icon">✍️</span>
+            <h3>Ajouter un souhait</h3>
+            <p>Partage ce dont tu rêves, ce que tu aimerais faire ou avoir. Rien n'est trop grand ou trop petit !</p>
+            <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSefXKhBErizwADrhCl4V43-HNwWxLz7z-Jd6tD3ajzUvsjDig/viewform?usp=header', '_blank')" class="action-btn">
+              Ajouter mon souhait
+            </button>
+          </div>
+
+          <div class="action-card">
+            <span class="action-icon">📋</span>
+            <h3>Voir tous les souhaits</h3>
+            <p>Consulte notre liste commune pour découvrir ce qu'on aimerait réaliser ensemble.</p>
+            <button onclick="window.open('https://docs.google.com/spreadsheets/d/1MGradCz0PXVhPYjqi9QmaVdh4lLDGs6Gx4QfioPC434/edit?resourcekey=&gid=1927656711#gid=1927656711', '_blank')" class="action-btn secondary">
+              Voir la wishlist
+            </button>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <h4>💡 Idées de souhaits à ajouter</h4>
+          <ul>
+            <li>Des voyages ou destinations que tu aimerais découvrir</li>
+            <li>Des activités à faire ensemble (restaurant, loisirs, sorties...)</li>
+            <li>Des cadeaux que tu aimerais recevoir</li>
+            <li>Des projets de vie (maison, animaux, études...)</li>
+            <li>Des expériences uniques à vivre ensemble</li>
+          </ul>
+        </div>
+
+        <div class="examples-section">
+          <h3>Exemples d'inspirations 💭</h3>
+          <div class="examples-grid">
+            <div class="example-item">
+              <strong>Voyage ✈️</strong>
+              <p>Visiter le Japon ensemble et goûter des vrais ramens à Tokyo</p>
+            </div>
+            <div class="example-item">
+              <strong>Expérience 🎢</strong>
+              <p>Faire un saut en parachute ou du parapente</p>
+            </div>
+            <div class="example-item">
+              <strong>Cadeau 🎁</strong>
+              <p>Un Monchhichi géant pour notre collection</p>
+            </div>
+            <div class="example-item">
+              <strong>Projet 🏠</strong>
+              <p>Avoir notre propre appartement avec un balcon</p>
+            </div>
+            <div class="example-item">
+              <strong>Activité 🎮</strong>
+              <p>Setup gaming complet pour jouer ensemble</p>
+            </div>
+            <div class="example-item">
+              <strong>Moment 💕</strong>
+              <p>Passer un weekend dans un chalet à la montagne</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 3rem; padding: 2rem; background: var(--bg-card); border-radius: 20px; text-align: center;">
+          <p style="color: var(--text-secondary); line-height: 1.8; font-size: 1.1rem;">
+            <strong style="color: var(--accent);">Note importante :</strong><br>
+            Remplace les liens Google Forms et Google Sheets par tes propres liens !<br>
+            Crée un formulaire et un tableur Google pour que ça fonctionne 💖
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

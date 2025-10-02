@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Roulette Mots Doux 💝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .roulette-container {
+      max-width: 700px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    .wheel-wrapper {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      margin: 3rem auto;
+      perspective: 1000px;
+    }
+
+    .roulette-wheel {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      border-radius: 50%;
+      border: 15px solid transparent;
+      background: linear-gradient(white, white) padding-box,
+                  linear-gradient(135deg, var(--accent), var(--gradient-2), var(--gradient-3)) border-box;
+      box-shadow: 0 20px 60px rgba(255, 107, 157, 0.4),
+                  0 0 0 20px rgba(255, 255, 255, 0.1),
+                  inset 0 0 50px rgba(255, 107, 157, 0.1);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+
+    .roulette-wheel:hover {
+      transform: scale(1.02) rotateX(5deg);
+    }
+
+    .wheel-section {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      transform-origin: 100% 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 20%;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 3px 6px rgba(0,0,0,0.4),
+                   0 0 20px rgba(255,255,255,0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .wheel-section:hover {
+      filter: brightness(1.2);
+      z-index: 10;
+    }
+
+    .wheel-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, var(--accent), var(--gradient-2));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3),
+                  inset 0 0 20px rgba(255,255,255,0.2);
+      z-index: 100;
+      border: 8px solid white;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.05); }
+    }
+
+    .wheel-pointer {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 30px solid transparent;
+      border-right: 30px solid transparent;
+      border-top: 60px solid var(--accent);
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
+      z-index: 200;
+      animation: pointerBounce 1s ease-in-out infinite;
+    }
+
+    @keyframes pointerBounce {
+      0%, 100% { top: -60px; }
+      50% { top: -55px; }
+    }
+
+    .spin-button {
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      color: white;
+      border: none;
+      padding: 1.5rem 4rem;
+      border-radius: 60px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4),
+                  inset 0 -3px 0 rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .spin-button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .spin-button:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .spin-button:hover:not(:disabled) {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(255, 107, 157, 0.5),
+                  inset 0 -3px 0 rgba(0,0,0,0.2);
+    }
+
+    .spin-button:active:not(:disabled) {
+      transform: translateY(-2px);
+    }
+
+    .spin-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .result-display {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      padding: 2.5rem;
+      margin: 2rem 0;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 40px rgba(255, 107, 157, 0.2);
+      border: 3px solid transparent;
+      background-clip: padding-box;
+      position: relative;
+    }
+
+    .result-display::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 25px;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--accent), var(--gradient-2));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.5;
+    }
+
+    .result-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--accent), var(--gradient-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.3); }
+    }
+
+    .result-text {
+      font-size: 1.3rem;
+      color: var(--text-primary);
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .bon-display {
+      margin-top: 1.5rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--accent), var(--gradient-2));
+      border-radius: 20px;
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+      animation: bonAppear 0.5s ease;
+    }
+
+    @keyframes bonAppear {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(var(--spin-rotation)); }
+    }
+
+    .spinning {
+      animation: spin var(--spin-duration) cubic-bezier(0.17, 0.67, 0.12, 0.99);
+    }
+
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      position: fixed;
+      animation: confettiFall 3s linear forwards;
+      z-index: 9999;
+    }
+
+    @keyframes confettiFall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .wheel-wrapper {
+        width: 350px;
+        height: 350px;
+      }
+      
+      .wheel-section {
+        font-size: 0.85rem;
+        padding-left: 15%;
+      }
+
+      .wheel-center {
+        width: 90px;
+        height: 90px;
+        font-size: 2.5rem;
+      }
+
+      .spin-button {
+        padding: 1.2rem 3rem;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="particles-bg" aria-hidden="true"></div>
+  
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">Miminella 💖</div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="galerie.html" class="nav-link">Galerie</a>
+        <a href="timeline.html" class="nav-link">Timeline</a>
+        <a href="jeu.html" class="nav-link">Jeux</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="roulette-mots.html" class="nav-link active">Roulette Mots</a>
+        <a href="roulette-defis.html" class="nav-link">Défis</a>
+        <a href="wishlist.html" class="nav-link">Wishlist</a>
+        <a href="playlist.html" class="nav-link">Playlist</a>
+      </div>
+    </div>
+  </nav>
+
+  <button id="theme-toggle" class="theme-btn" aria-label="Changer le thème">
+    <span class="theme-icon">🌙</span>
+  </button>
+
+  <main style="padding-top: 100px; min-height: 100vh;">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Roulette des Mots Doux 💝</h1>
+        <p class="hero-subtitle">
+          Tourne la roue pour découvrir un mot doux ou une surprise magique 🎁✨
+        </p>
+
+        <div class="roulette-container">
+          <div class="wheel-wrapper">
+            <div class="wheel-pointer"></div>
+            <div class="roulette-wheel" id="wheel">
+              <div class="wheel-center">💖</div>
+            </div>
+          </div>
+
+          <button class="spin-button" id="spinBtn">
+            🎰 Tourner la roue !
+          </button>
+
+          <div class="result-display" id="result">
+            <div class="result-title">Prête ?</div>
+            <div class="result-text">Clique sur le bouton pour découvrir ta surprise magique !</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+  <script>
+    const items = [
+      { type: 'mot', text: 'Tu es la plus belle personne du monde 🌟' },
+      { type: 'bon', text: '🎁 BON pour un câlin de 10 minutes (Quand on se reverra ♥)' },
+      { type: 'mot', text: 'Ton sourire illumine ma journée ☀️' },
+      { type: 'bon', text: '🎁 BON pour un massage de 15 minutes (Quand on se reverra ♥)' },
+      { type: 'mot', text: 'Je pense à toi à chaque instant 💭' },
+      { type: 'bon', text: '🎁 BON pour une soirée film de ton choix' },
+      { type: 'mot', text: 'Tu es mon rayon de soleil quotidien 🌞' },
+      { type: 'bon', text: '🎁 BON pour un petit-déjeuner au lit (Quand on se reverra ♥)' },
+      { type: 'mot', text: 'Chaque jour avec toi est magique ✨' },
+      { type: 'bon', text: '🎁 BON pour une photo de ce que tu veux' },
+      { type: 'mot', text: 'Tu es ma personne préférée au monde 💖' },
+      { type: 'bon', text: '🎁 BON pour une surprise' }
+    ];
+
+    const colors = [
+      'linear-gradient(135deg, #ff9a9e, #fecfef)',
+      'linear-gradient(135deg, #fbc2eb, #a18cd1)',
+      'linear-gradient(135deg, #fad0c4, #ffd1ff)',
+      'linear-gradient(135deg, #a18cd1, #fbc2eb)',
+      'linear-gradient(135deg, #ffecd2, #fcb69f)',
+      'linear-gradient(135deg, #ff9a9e, #fad0c4)',
+      'linear-gradient(135deg, #fecfef, #ff9a9e)',
+      'linear-gradient(135deg, #a18cd1, #fad0c4)',
+      'linear-gradient(135deg, #fcb69f, #ffecd2)',
+      'linear-gradient(135deg, #ffd1ff, #fbc2eb)',
+      'linear-gradient(135deg, #fbc2eb, #ff9a9e)',
+      'linear-gradient(135deg, #fad0c4, #a18cd1)'
+    ];
+
+    const wheel = document.getElementById('wheel');
+    const spinBtn = document.getElementById('spinBtn');
+    const resultDiv = document.getElementById('result');
+    let isSpinning = false;
+
+    items.forEach((item, index) => {
+      const section = document.createElement('div');
+      section.className = 'wheel-section';
+      const angle = (360 / items.length) * index;
+      section.style.transform = `rotate(${angle}deg) skewY(${-90 + 360/items.length}deg)`;
+      section.style.background = colors[index];
+      section.textContent = item.type === 'bon' ? '🎁' : '💌';
+      wheel.appendChild(section);
+    });
+
+    function createConfetti() {
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.animationDelay = Math.random() * 0.5 + 's';
+          document.body.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 3000);
+        }, i * 30);
+      }
+    }
+
+    spinBtn.addEventListener('click', () => {
+      if (isSpinning) return;
+      
+      isSpinning = true;
+      spinBtn.disabled = true;
+      resultDiv.innerHTML = '<div class="result-title">La roue tourne... 🎰</div><div class="result-text">La magie opère !</div>';
+
+      const spins = 5 + Math.random() * 3;
+      const randomIndex = Math.floor(Math.random() * items.length);
+      const baseRotation = 360 * spins;
+      const itemAngle = 360 / items.length;
+      const targetRotation = baseRotation + (360 - (randomIndex * itemAngle + itemAngle / 2));
+
+      wheel.style.setProperty('--spin-rotation', `${targetRotation}deg`);
+      wheel.style.setProperty('--spin-duration', '5s');
+      wheel.classList.add('spinning');
+
+      setTimeout(() => {
+        wheel.classList.remove('spinning');
+        wheel.style.transform = `rotate(${targetRotation % 360}deg)`;
+        
+        const selectedItem = items[randomIndex];
+        let resultHTML = `<div class="result-title">✨ Tu as gagné !</div>`;
+        resultHTML += `<div class="result-text">${selectedItem.text}</div>`;
+        
+        if (selectedItem.type === 'bon') {
+          resultHTML += `<div class="bon-display">💝 Ce bon est valable dès maintenant ! Montre-le pour l'utiliser 💝</div>`;
+          createConfetti();
+        }
+        
+        resultDiv.innerHTML = resultHTML;
+        
+        isSpinning = false;
+        spinBtn.disabled = false;
+      }, 5000);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Roulette des Défis 🎯</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .roulette-container {
+      max-width: 700px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    .wheel-wrapper {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      margin: 3rem auto;
+      perspective: 1000px;
+    }
+
+    .roulette-wheel {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      border-radius: 50%;
+      border: 15px solid transparent;
+      background: linear-gradient(white, white) padding-box,
+                  linear-gradient(135deg, #ff6b9d, #f8b500, #4a69bd, #eb3b5a) border-box;
+      box-shadow: 0 20px 60px rgba(255, 107, 157, 0.4),
+                  0 0 0 20px rgba(255, 255, 255, 0.1),
+                  inset 0 0 50px rgba(255, 107, 157, 0.1);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+
+    .roulette-wheel:hover {
+      transform: scale(1.02) rotateX(5deg);
+    }
+
+    .wheel-section {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      transform-origin: 100% 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 20%;
+      font-size: 2.5rem;
+      color: white;
+      text-shadow: 0 3px 6px rgba(0,0,0,0.4),
+                   0 0 20px rgba(255,255,255,0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .wheel-section:hover {
+      filter: brightness(1.2);
+      z-index: 10;
+    }
+
+    .wheel-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #ff6b9d, #f8b500);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3),
+                  inset 0 0 20px rgba(255,255,255,0.2);
+      z-index: 100;
+      border: 8px solid white;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.05); }
+    }
+
+    .wheel-pointer {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 30px solid transparent;
+      border-right: 30px solid transparent;
+      border-top: 60px solid #f8b500;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
+      z-index: 200;
+      animation: pointerBounce 1s ease-in-out infinite;
+    }
+
+    @keyframes pointerBounce {
+      0%, 100% { top: -60px; }
+      50% { top: -55px; }
+    }
+
+    .spin-button {
+      background: linear-gradient(135deg, #ff6b9d, #f8b500);
+      color: white;
+      border: none;
+      padding: 1.5rem 4rem;
+      border-radius: 60px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(248, 181, 0, 0.4),
+                  inset 0 -3px 0 rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .spin-button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .spin-button:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .spin-button:hover:not(:disabled) {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(248, 181, 0, 0.5),
+                  inset 0 -3px 0 rgba(0,0,0,0.2);
+    }
+
+    .spin-button:active:not(:disabled) {
+      transform: translateY(-2px);
+    }
+
+    .spin-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .result-display {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      padding: 2.5rem;
+      margin: 2rem 0;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 40px rgba(248, 181, 0, 0.2);
+      border: 3px solid transparent;
+      background-clip: padding-box;
+      position: relative;
+    }
+
+    .result-display::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 25px;
+      padding: 3px;
+      background: linear-gradient(135deg, #ff6b9d, #f8b500);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.5;
+    }
+
+    .result-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #ff6b9d, #f8b500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.3); }
+    }
+
+    .result-text {
+      font-size: 1.4rem;
+      color: var(--text-primary);
+      line-height: 1.8;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .difficulty-badge {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      animation: badgeAppear 0.5s ease;
+    }
+
+    @keyframes badgeAppear {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .easy { 
+      background: linear-gradient(135deg, #4CAF50, #8BC34A); 
+      color: white; 
+    }
+    .medium { 
+      background: linear-gradient(135deg, #FF9800, #FFC107); 
+      color: white; 
+    }
+    .hard { 
+      background: linear-gradient(135deg, #F44336, #E91E63); 
+      color: white; 
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(var(--spin-rotation)); }
+    }
+
+    .spinning {
+      animation: spin var(--spin-duration) cubic-bezier(0.17, 0.67, 0.12, 0.99);
+    }
+
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      animation: sparkleAnim 1s ease-out forwards;
+      z-index: 9999;
+    }
+
+    @keyframes sparkleAnim {
+      0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2) rotate(180deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .wheel-wrapper {
+        width: 350px;
+        height: 350px;
+      }
+      
+      .wheel-section {
+        font-size: 2rem;
+        padding-left: 15%;
+      }
+
+      .wheel-center {
+        width: 90px;
+        height: 90px;
+        font-size: 2.5rem;
+      }
+
+      .spin-button {
+        padding: 1.2rem 3rem;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="particles-bg" aria-hidden="true"></div>
+  
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">Miminella 💖</div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="galerie.html" class="nav-link">Galerie</a>
+        <a href="timeline.html" class="nav-link">Timeline</a>
+        <a href="jeu.html" class="nav-link">Jeux</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="roulette-mots.html" class="nav-link">Roulette Mots</a>
+        <a href="roulette-defis.html" class="nav-link active">Défis</a>
+        <a href="wishlist.html" class="nav-link">Wishlist</a>
+        <a href="playlist.html" class="nav-link">Playlist</a>
+      </div>
+    </div>
+  </nav>
+
+  <button id="theme-toggle" class="theme-btn" aria-label="Changer le thème">
+    <span class="theme-icon">🌙</span>
+  </button>
+
+  <main style="padding-top: 100px; min-height: 100vh;">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Roulette des Défis 🎯</h1>
+        <p class="hero-subtitle">
+          Ose tourner la roue pour découvrir un défi rigolo à relever !
+        </p>
+
+        <div class="roulette-container">
+          <div class="wheel-wrapper">
+            <div class="wheel-pointer"></div>
+            <div class="roulette-wheel" id="wheel">
+              <div class="wheel-center">🎲</div>
+            </div>
+          </div>
+
+          <button class="spin-button" id="spinBtn">
+            🔥 Lancer le défi !
+          </button>
+
+          <div class="result-display" id="result">
+            <div class="result-title">Prêt(e) ?</div>
+            <div class="result-text">Tourne la roue et relève le challenge !</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+  <script>
+    const defis = [
+      { text: 'Faire 20 pompe ', difficulty: 'easy', emoji: '🏃' },
+      { text: 'Imiter le cochon', difficulty: 'easy', emoji: '🐶' },
+      { text: 'Faire un compliment en chantant', difficulty: 'medium', emoji: '🎤' },
+      { text: 'Danser sur une chanson embarrassante', difficulty: 'medium', emoji: '💃' },
+      { text: 'Raconter une blague vraiment nulle', difficulty: 'easy', emoji: '😂' },
+      { text: 'Faire 10 squat', difficulty: 'hard', emoji: '💪' },
+      { text: 'Twerker', difficulty: 'hard', emoji: '📝' },
+      { text: 'Prendre une photo/video rigolote', difficulty: 'easy', emoji: '📸' },
+      { text: 'Inventer une histoire absurde ', difficulty: 'medium', emoji: '📖' },
+      { text: 'Faire un prank a ta maman', difficulty: 'hard', emoji: '🤸' },
+      { text: 'Mettre le plus de vetement possible', difficulty: 'medium', emoji: '👕' },
+      { text: 'Dessiner un portrait de l\'autre les yeux fermés', difficulty: 'medium', emoji: '🎨' }
+    ];
+
+    const colors = [
+      'linear-gradient(135deg, #ff6b9d, #c44569)',
+      'linear-gradient(135deg, #f8b500, #feca57)',
+      'linear-gradient(135deg, #4a69bd, #6a89cc)',
+      'linear-gradient(135deg, #f19066, #f5cd79)',
+      'linear-gradient(135deg, #e55039, #eb3b5a)',
+      'linear-gradient(135deg, #a55eea, #c44569)',
+      'linear-gradient(135deg, #0fb9b1, #60a3bc)',
+      'linear-gradient(135deg, #f8b500, #786fa6)',
+      'linear-gradient(135deg, #eb3b5a, #f19066)',
+      'linear-gradient(135deg, #4a69bd, #a55eea)',
+      'linear-gradient(135deg, #60a3bc, #0fb9b1)',
+      'linear-gradient(135deg, #786fa6, #f8b500)',
+      'linear-gradient(135deg, #c44569, #ff6b9d)'
+    ];
+
+    const wheel = document.getElementById('wheel');
+    const spinBtn = document.getElementById('spinBtn');
+    const resultDiv = document.getElementById('result');
+    let isSpinning = false;
+
+    defis.forEach((defi, index) => {
+      const section = document.createElement('div');
+      section.className = 'wheel-section';
+      const angle = (360 / defis.length) * index;
+      section.style.transform = `rotate(${angle}deg) skewY(${-90 + 360/defis.length}deg)`;
+      section.style.background = colors[index];
+      section.textContent = defi.emoji;
+      wheel.appendChild(section);
+    });
+
+    function createSparkles() {
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+          const sparkle = document.createElement('div');
+          sparkle.className = 'sparkle';
+          sparkle.textContent = ['⭐', '✨', '💫', '🌟'][Math.floor(Math.random() * 4)];
+          sparkle.style.left = Math.random() * 100 + 'vw';
+          sparkle.style.top = Math.random() * 100 + 'vh';
+          sparkle.style.fontSize = (Math.random() * 20 + 20) + 'px';
+          document.body.appendChild(sparkle);
+          setTimeout(() => sparkle.remove(), 1000);
+        }, i * 50);
+      }
+    }
+
+    spinBtn.addEventListener('click', () => {
+      if (isSpinning) return;
+      
+      isSpinning = true;
+      spinBtn.disabled = true;
+      resultDiv.innerHTML = '<div class="result-title">La roue tourne... 🎲</div><div class="result-text">Prépare-toi pour le défi !</div>';
+
+      const spins = 5 + Math.random() * 3;
+      const randomIndex = Math.floor(Math.random() * defis.length);
+      const baseRotation = 360 * spins;
+      const itemAngle = 360 / defis.length;
+      const targetRotation = baseRotation + (360 - (randomIndex * itemAngle + itemAngle / 2));
+
+      wheel.style.setProperty('--spin-rotation', `${targetRotation}deg`);
+      wheel.style.setProperty('--spin-duration', '5s');
+      wheel.classList.add('spinning');
+
+      setTimeout(() => {
+        wheel.classList.remove('spinning');
+        wheel.style.transform = `rotate(${targetRotation % 360}deg)`;
+        
+        const selectedDefi = defis[randomIndex];
+        const difficultyText = {
+          easy: 'Facile 😊',
+          medium: 'Moyen 🤔',
+          hard: 'Difficile 😅'
+        };
+        
+        let resultHTML = `<div class="result-title">${selectedDefi.emoji} Ton défi !</div>`;
+        resultHTML += `<div class="result-text">${selectedDefi.text}</div>`;
+        resultHTML += `<div class="difficulty-badge ${selectedDefi.difficulty}">${difficultyText[selectedDefi.difficulty]}</div>`;
+        
+        resultDiv.innerHTML = resultHTML;
+        
+        createSparkles();
+        
+        isSpinning = false;
+        spinBtn.disabled = false;
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
