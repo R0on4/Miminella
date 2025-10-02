@@ -70,8 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const codeBtn = document.getElementById('code-secret-btn');
   if (codeBtn) {
     codeBtn.addEventListener('click', () => {
-      const code = prompt('💝 Indice : C\'est notre sentiment + l\'année où tout a commencé\n(en anglais, tout en minuscules, sans espace)\nExemple : mot2025\n');
-      if (code && code.toLowerCase() === 'love2025') {
+      const code = prompt('💝 Indice : Evenement recent ou tu a beaucoup stresser (jj/mm/aaaa) \n');
+      if (code && code.toLowerCase() === '310725') {
         window.location.href = 'secret2.html';
       } else if (code) {
         alert('Ce n\'est pas le bon code... Réfléchis bien à l\'indice ! 💭');
