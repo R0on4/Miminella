@@ -20,27 +20,20 @@
       width: 500px;
       height: 500px;
       margin: 3rem auto;
-      perspective: 1000px;
     }
 
     .roulette-wheel {
+      position: relative;
       width: 100%;
       height: 100%;
-      position: relative;
       border-radius: 50%;
-      border: 15px solid transparent;
-      background: linear-gradient(white, white) padding-box,
-                  linear-gradient(135deg, #ff6b9d, #f8b500, #4a69bd, #eb3b5a) border-box;
-      box-shadow: 0 20px 60px rgba(255, 107, 157, 0.4),
-                  0 0 0 20px rgba(255, 255, 255, 0.1),
-                  inset 0 0 50px rgba(255, 107, 157, 0.1);
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      box-shadow: 
+        0 25px 50px rgba(255, 107, 157, 0.3),
+        inset 0 0 60px rgba(255, 255, 255, 0.1);
       overflow: hidden;
-      transform-style: preserve-3d;
-      transition: transform 0.5s ease;
-    }
-
-    .roulette-wheel:hover {
-      transform: scale(1.02) rotateX(5deg);
+      border: 8px solid var(--accent);
     }
 
     .wheel-section {
@@ -51,18 +44,17 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      padding-left: 20%;
-      font-size: 2.5rem;
+      padding-left: 30%;
+      font-size: 2rem;
       color: white;
-      text-shadow: 0 3px 6px rgba(0,0,0,0.4),
-                   0 0 20px rgba(255,255,255,0.3);
-      transition: all 0.3s ease;
-      cursor: pointer;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      transition: filter 0.3s ease;
+      clip-path: polygon(100% 100%, 0 100%, 0 0);
     }
 
     .wheel-section:hover {
-      filter: brightness(1.2);
-      z-index: 10;
+      filter: brightness(1.1);
     }
 
     .wheel-center {
@@ -70,48 +62,43 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, #ff6b9d, #f8b500);
+      width: 140px;
+      height: 140px;
+      background: var(--accent);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3),
-                  inset 0 0 20px rgba(255,255,255,0.2);
+      font-size: 3.5rem;
+      box-shadow: 
+        0 10px 30px rgba(255, 107, 157, 0.5),
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
       z-index: 100;
-      border: 8px solid white;
-      animation: pulse 2s ease-in-out infinite;
+      border: 6px solid white;
+      animation: centerPulse 2.5s ease-in-out infinite;
     }
 
-    @keyframes pulse {
+    @keyframes centerPulse {
       0%, 100% { transform: translate(-50%, -50%) scale(1); }
       50% { transform: translate(-50%, -50%) scale(1.05); }
     }
 
     .wheel-pointer {
       position: absolute;
-      top: -60px;
+      top: -50px;
       left: 50%;
       transform: translateX(-50%);
       width: 0;
       height: 0;
-      border-left: 30px solid transparent;
-      border-right: 30px solid transparent;
-      border-top: 60px solid #f8b500;
-      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
+      border-left: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-top: 50px solid var(--accent);
+      filter: drop-shadow(0 5px 10px rgba(255, 107, 157, 0.5));
       z-index: 200;
-      animation: pointerBounce 1s ease-in-out infinite;
-    }
-
-    @keyframes pointerBounce {
-      0%, 100% { top: -60px; }
-      50% { top: -55px; }
     }
 
     .spin-button {
-      background: linear-gradient(135deg, #ff6b9d, #f8b500);
+      background: var(--accent);
       color: white;
       border: none;
       padding: 1.5rem 4rem;
@@ -119,36 +106,17 @@
       font-size: 1.4rem;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 10px 30px rgba(248, 181, 0, 0.4),
-                  inset 0 -3px 0 rgba(0,0,0,0.2);
+      box-shadow: var(--shadow-md);
       transition: all 0.3s ease;
-      margin: 2rem 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .spin-button::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.3);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-
-    .spin-button:hover::before {
-      width: 300px;
-      height: 300px;
+      margin: 2.5rem 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .spin-button:hover:not(:disabled) {
+      background: var(--accent-hover);
       transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(248, 181, 0, 0.5),
-                  inset 0 -3px 0 rgba(0,0,0,0.2);
+      box-shadow: var(--shadow-lg);
     }
 
     .spin-button:active:not(:disabled) {
@@ -162,51 +130,24 @@
 
     .result-display {
       background: var(--bg-card);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(10px);
       border-radius: 25px;
       padding: 2.5rem;
       margin: 2rem 0;
-      min-height: 220px;
+      min-height: 200px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 10px 40px rgba(248, 181, 0, 0.2);
-      border: 3px solid transparent;
-      background-clip: padding-box;
-      position: relative;
-    }
-
-    .result-display::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 25px;
-      padding: 3px;
-      background: linear-gradient(135deg, #ff6b9d, #f8b500);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0.5;
+      box-shadow: var(--shadow-sm);
+      border-left: 5px solid var(--accent);
     }
 
     .result-title {
       font-family: 'Dancing Script', cursive;
       font-size: 2.5rem;
-      background: linear-gradient(135deg, #ff6b9d, #f8b500);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--accent);
       margin-bottom: 1rem;
-      animation: shimmer 3s ease-in-out infinite;
-    }
-
-    @keyframes shimmer {
-      0%, 100% { filter: brightness(1); }
-      50% { filter: brightness(1.3); }
     }
 
     .result-text {
@@ -224,7 +165,7 @@
       font-weight: 700;
       margin-top: 1.5rem;
       font-size: 1.1rem;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      box-shadow: var(--shadow-sm);
       animation: badgeAppear 0.5s ease;
     }
 
@@ -252,6 +193,16 @@
       color: white; 
     }
 
+    .daily-limit-msg {
+      background: linear-gradient(135deg, var(--accent), var(--gradient-2));
+      color: white;
+      padding: 2rem;
+      border-radius: 20px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
+    }
+
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(var(--spin-rotation)); }
@@ -263,18 +214,15 @@
 
     .sparkle {
       position: fixed;
+      font-size: 2rem;
       pointer-events: none;
-      animation: sparkleAnim 1s ease-out forwards;
       z-index: 9999;
+      animation: sparkleFloat 2s ease-out forwards;
     }
 
-    @keyframes sparkleAnim {
-      0% {
-        transform: scale(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(2) rotate(180deg);
+    @keyframes sparkleFloat {
+      to {
+        transform: translateY(-100px) scale(1.5);
         opacity: 0;
       }
     }
@@ -284,15 +232,15 @@
         width: 350px;
         height: 350px;
       }
-      
+
       .wheel-section {
-        font-size: 2rem;
-        padding-left: 15%;
+        font-size: 1.5rem;
+        padding-left: 25%;
       }
 
       .wheel-center {
-        width: 90px;
-        height: 90px;
+        width: 100px;
+        height: 100px;
         font-size: 2.5rem;
       }
 
@@ -337,7 +285,7 @@
       <div class="hero-content">
         <h1 class="hero-title">Roulette des Défis 🎯</h1>
         <p class="hero-subtitle">
-          Ose tourner la roue pour découvrir un défi rigolo à relever !
+          Ose tourner la roue pour un défi rigolo (une fois par jour)
         </p>
 
         <div class="roulette-container">
@@ -349,7 +297,7 @@
           </div>
 
           <button class="spin-button" id="spinBtn">
-            🔥 Lancer le défi !
+            🔥 Lancer le défi
           </button>
 
           <div class="result-display" id="result">
@@ -363,6 +311,8 @@
 
   <script src="js/script.js"></script>
   <script>
+    const STORAGE_KEY = 'lastSpinDate_defis';
+    
     const defis = [
       { text: 'Faire 20 pompe ', difficulty: 'easy', emoji: '🏃' },
       { text: 'Imiter le cochon', difficulty: 'easy', emoji: '🐶' },
@@ -379,19 +329,18 @@
     ];
 
     const colors = [
-      'linear-gradient(135deg, #ff6b9d, #c44569)',
-      'linear-gradient(135deg, #f8b500, #feca57)',
-      'linear-gradient(135deg, #4a69bd, #6a89cc)',
-      'linear-gradient(135deg, #f19066, #f5cd79)',
-      'linear-gradient(135deg, #e55039, #eb3b5a)',
-      'linear-gradient(135deg, #a55eea, #c44569)',
-      'linear-gradient(135deg, #0fb9b1, #60a3bc)',
-      'linear-gradient(135deg, #f8b500, #786fa6)',
-      'linear-gradient(135deg, #eb3b5a, #f19066)',
-      'linear-gradient(135deg, #4a69bd, #a55eea)',
-      'linear-gradient(135deg, #60a3bc, #0fb9b1)',
-      'linear-gradient(135deg, #786fa6, #f8b500)',
-      'linear-gradient(135deg, #c44569, #ff6b9d)'
+      'linear-gradient(135deg, #ff9a9e, #fecfef)',
+      'linear-gradient(135deg, #fbc2eb, #a18cd1)',
+      'linear-gradient(135deg, #fad0c4, #ffd1ff)',
+      'linear-gradient(135deg, #a18cd1, #fbc2eb)',
+      'linear-gradient(135deg, #ffecd2, #fcb69f)',
+      'linear-gradient(135deg, #ff9a9e, #fad0c4)',
+      'linear-gradient(135deg, #fecfef, #ff9a9e)',
+      'linear-gradient(135deg, #a18cd1, #fad0c4)',
+      'linear-gradient(135deg, #fcb69f, #ffecd2)',
+      'linear-gradient(135deg, #ffd1ff, #fbc2eb)',
+      'linear-gradient(135deg, #fbc2eb, #ff9a9e)',
+      'linear-gradient(135deg, #fad0c4, #a18cd1)'
     ];
 
     const wheel = document.getElementById('wheel');
@@ -409,6 +358,16 @@
       wheel.appendChild(section);
     });
 
+    function canSpinToday() {
+      const lastSpin = localStorage.getItem(STORAGE_KEY);
+      if (!lastSpin) return true;
+      
+      const lastDate = new Date(lastSpin);
+      const today = new Date();
+      
+      return lastDate.toDateString() !== today.toDateString();
+    }
+
     function createSparkles() {
       for (let i = 0; i < 30; i++) {
         setTimeout(() => {
@@ -416,16 +375,26 @@
           sparkle.className = 'sparkle';
           sparkle.textContent = ['⭐', '✨', '💫', '🌟'][Math.floor(Math.random() * 4)];
           sparkle.style.left = Math.random() * 100 + 'vw';
-          sparkle.style.top = Math.random() * 100 + 'vh';
-          sparkle.style.fontSize = (Math.random() * 20 + 20) + 'px';
+          sparkle.style.top = Math.random() * 50 + 50 + 'vh';
           document.body.appendChild(sparkle);
-          setTimeout(() => sparkle.remove(), 1000);
+          setTimeout(() => sparkle.remove(), 2000);
         }, i * 50);
       }
     }
 
     spinBtn.addEventListener('click', () => {
       if (isSpinning) return;
+      
+      if (!canSpinToday()) {
+        resultDiv.innerHTML = `
+          <div class="daily-limit-msg">
+            <div style="font-size: 2.5rem; margin-bottom: 1rem;">⏰</div>
+            <div>Tu as déjà tourné la roue aujourd'hui !</div>
+            <div style="font-size: 0.95rem; margin-top: 0.8rem; opacity: 0.95;">Reviens demain pour un nouveau défi 🎯</div>
+          </div>
+        `;
+        return;
+      }
       
       isSpinning = true;
       spinBtn.disabled = true;
@@ -460,10 +429,19 @@
         
         createSparkles();
         
+        localStorage.setItem(STORAGE_KEY, new Date().toISOString());
+        
         isSpinning = false;
         spinBtn.disabled = false;
+        spinBtn.textContent = '✅ Déjà tourné aujourd\'hui';
+        spinBtn.style.opacity = '0.6';
       }, 5000);
     });
+
+    if (!canSpinToday()) {
+      spinBtn.textContent = 'Reviens demain 💪';
+      spinBtn.disabled = true;
+    }
   </script>
 </body>
 </html>

@@ -20,27 +20,20 @@
       width: 500px;
       height: 500px;
       margin: 3rem auto;
-      perspective: 1000px;
     }
 
     .roulette-wheel {
+      position: relative;
       width: 100%;
       height: 100%;
-      position: relative;
       border-radius: 50%;
-      border: 15px solid transparent;
-      background: linear-gradient(white, white) padding-box,
-                  linear-gradient(135deg, var(--accent), var(--gradient-2), var(--gradient-3)) border-box;
-      box-shadow: 0 20px 60px rgba(255, 107, 157, 0.4),
-                  0 0 0 20px rgba(255, 255, 255, 0.1),
-                  inset 0 0 50px rgba(255, 107, 157, 0.1);
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      box-shadow: 
+        0 25px 50px rgba(255, 107, 157, 0.3),
+        inset 0 0 60px rgba(255, 255, 255, 0.1);
       overflow: hidden;
-      transform-style: preserve-3d;
-      transition: transform 0.5s ease;
-    }
-
-    .roulette-wheel:hover {
-      transform: scale(1.02) rotateX(5deg);
+      border: 8px solid var(--accent);
     }
 
     .wheel-section {
@@ -51,19 +44,17 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      padding-left: 20%;
-      font-size: 1.1rem;
-      font-weight: 700;
+      padding-left: 30%;
+      font-size: 2rem;
       color: white;
-      text-shadow: 0 3px 6px rgba(0,0,0,0.4),
-                   0 0 20px rgba(255,255,255,0.3);
-      transition: all 0.3s ease;
-      cursor: pointer;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      transition: filter 0.3s ease;
+      clip-path: polygon(100% 100%, 0 100%, 0 0);
     }
 
     .wheel-section:hover {
-      filter: brightness(1.2);
-      z-index: 10;
+      filter: brightness(1.1);
     }
 
     .wheel-center {
@@ -71,48 +62,43 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(135deg, var(--accent), var(--gradient-2));
+      width: 140px;
+      height: 140px;
+      background: var(--accent);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3),
-                  inset 0 0 20px rgba(255,255,255,0.2);
+      font-size: 3.5rem;
+      box-shadow: 
+        0 10px 30px rgba(255, 107, 157, 0.5),
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
       z-index: 100;
-      border: 8px solid white;
-      animation: pulse 2s ease-in-out infinite;
+      border: 6px solid white;
+      animation: centerPulse 2.5s ease-in-out infinite;
     }
 
-    @keyframes pulse {
+    @keyframes centerPulse {
       0%, 100% { transform: translate(-50%, -50%) scale(1); }
       50% { transform: translate(-50%, -50%) scale(1.05); }
     }
 
     .wheel-pointer {
       position: absolute;
-      top: -60px;
+      top: -50px;
       left: 50%;
       transform: translateX(-50%);
       width: 0;
       height: 0;
-      border-left: 30px solid transparent;
-      border-right: 30px solid transparent;
-      border-top: 60px solid var(--accent);
-      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
+      border-left: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-top: 50px solid var(--accent);
+      filter: drop-shadow(0 5px 10px rgba(255, 107, 157, 0.5));
       z-index: 200;
-      animation: pointerBounce 1s ease-in-out infinite;
-    }
-
-    @keyframes pointerBounce {
-      0%, 100% { top: -60px; }
-      50% { top: -55px; }
     }
 
     .spin-button {
-      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      background: var(--accent);
       color: white;
       border: none;
       padding: 1.5rem 4rem;
@@ -120,36 +106,17 @@
       font-size: 1.4rem;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4),
-                  inset 0 -3px 0 rgba(0,0,0,0.2);
+      box-shadow: var(--shadow-md);
       transition: all 0.3s ease;
-      margin: 2rem 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .spin-button::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.3);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-
-    .spin-button:hover::before {
-      width: 300px;
-      height: 300px;
+      margin: 2.5rem 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .spin-button:hover:not(:disabled) {
+      background: var(--accent-hover);
       transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(255, 107, 157, 0.5),
-                  inset 0 -3px 0 rgba(0,0,0,0.2);
+      box-shadow: var(--shadow-lg);
     }
 
     .spin-button:active:not(:disabled) {
@@ -163,7 +130,7 @@
 
     .result-display {
       background: var(--bg-card);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(10px);
       border-radius: 25px;
       padding: 2.5rem;
       margin: 2rem 0;
@@ -172,42 +139,15 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 10px 40px rgba(255, 107, 157, 0.2);
-      border: 3px solid transparent;
-      background-clip: padding-box;
-      position: relative;
-    }
-
-    .result-display::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 25px;
-      padding: 3px;
-      background: linear-gradient(135deg, var(--accent), var(--gradient-2));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0.5;
+      box-shadow: var(--shadow-sm);
+      border-left: 5px solid var(--accent);
     }
 
     .result-title {
       font-family: 'Dancing Script', cursive;
       font-size: 2.5rem;
-      background: linear-gradient(135deg, var(--accent), var(--gradient-2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--accent);
       margin-bottom: 1rem;
-      animation: shimmer 3s ease-in-out infinite;
-    }
-
-    @keyframes shimmer {
-      0%, 100% { filter: brightness(1); }
-      50% { filter: brightness(1.3); }
     }
 
     .result-text {
@@ -215,28 +155,40 @@
       color: var(--text-primary);
       line-height: 1.8;
       text-align: center;
+      font-weight: 500;
     }
 
     .bon-display {
       margin-top: 1.5rem;
-      padding: 2rem;
-      background: linear-gradient(135deg, var(--accent), var(--gradient-2));
+      padding: 1.5rem 2rem;
+      background: var(--accent);
       border-radius: 20px;
       color: white;
       font-weight: 600;
-      box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
-      animation: bonAppear 0.5s ease;
+      font-size: 1.1rem;
+      box-shadow: var(--shadow-sm);
+      animation: bonSlideIn 0.5s ease;
     }
 
-    @keyframes bonAppear {
+    @keyframes bonSlideIn {
       from {
         opacity: 0;
-        transform: scale(0.8);
+        transform: translateY(20px);
       }
       to {
         opacity: 1;
-        transform: scale(1);
+        transform: translateY(0);
       }
+    }
+
+    .daily-limit-msg {
+      background: linear-gradient(135deg, var(--accent), var(--gradient-2));
+      color: white;
+      padding: 2rem;
+      border-radius: 20px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
     }
 
     @keyframes spin {
@@ -252,15 +204,14 @@
       position: fixed;
       width: 10px;
       height: 10px;
-      background: var(--accent);
-      position: fixed;
-      animation: confettiFall 3s linear forwards;
+      pointer-events: none;
       z-index: 9999;
+      animation: confettiFall 3s ease-out forwards;
     }
 
     @keyframes confettiFall {
       to {
-        transform: translateY(100vh) rotate(360deg);
+        transform: translateY(100vh) rotate(720deg);
         opacity: 0;
       }
     }
@@ -270,15 +221,15 @@
         width: 350px;
         height: 350px;
       }
-      
+
       .wheel-section {
-        font-size: 0.85rem;
-        padding-left: 15%;
+        font-size: 1.5rem;
+        padding-left: 25%;
       }
 
       .wheel-center {
-        width: 90px;
-        height: 90px;
+        width: 100px;
+        height: 100px;
         font-size: 2.5rem;
       }
 
@@ -323,7 +274,7 @@
       <div class="hero-content">
         <h1 class="hero-title">Roulette des Mots Doux 💝</h1>
         <p class="hero-subtitle">
-          Tourne la roue pour découvrir un mot doux ou une surprise magique 🎁✨
+          Tourne la roue pour découvrir un mot doux ou une surprise (une fois par jour)
         </p>
 
         <div class="roulette-container">
@@ -335,12 +286,12 @@
           </div>
 
           <button class="spin-button" id="spinBtn">
-            🎰 Tourner la roue !
+            🎰 Tourner la roue
           </button>
 
           <div class="result-display" id="result">
             <div class="result-title">Prête ?</div>
-            <div class="result-text">Clique sur le bouton pour découvrir ta surprise magique !</div>
+            <div class="result-text">Clique sur le bouton pour découvrir ta surprise</div>
           </div>
         </div>
       </div>
@@ -349,6 +300,8 @@
 
   <script src="js/script.js"></script>
   <script>
+    const STORAGE_KEY = 'lastSpinDate_mots';
+    
     const items = [
       { type: 'mot', text: 'Tu es la plus belle personne du monde 🌟' },
       { type: 'bon', text: '🎁 BON pour un câlin de 10 minutes (Quand on se reverra ♥)' },
@@ -394,14 +347,25 @@
       wheel.appendChild(section);
     });
 
+    function canSpinToday() {
+      const lastSpin = localStorage.getItem(STORAGE_KEY);
+      if (!lastSpin) return true;
+      
+      const lastDate = new Date(lastSpin);
+      const today = new Date();
+      
+      return lastDate.toDateString() !== today.toDateString();
+    }
+
     function createConfetti() {
       for (let i = 0; i < 50; i++) {
         setTimeout(() => {
           const confetti = document.createElement('div');
           confetti.className = 'confetti';
           confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.top = -10 + 'px';
           confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-          confetti.style.animationDelay = Math.random() * 0.5 + 's';
+          confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
           document.body.appendChild(confetti);
           setTimeout(() => confetti.remove(), 3000);
         }, i * 30);
@@ -411,9 +375,20 @@
     spinBtn.addEventListener('click', () => {
       if (isSpinning) return;
       
+      if (!canSpinToday()) {
+        resultDiv.innerHTML = `
+          <div class="daily-limit-msg">
+            <div style="font-size: 2.5rem; margin-bottom: 1rem;">⏰</div>
+            <div>Tu as déjà tourné la roue aujourd'hui !</div>
+            <div style="font-size: 0.95rem; margin-top: 0.8rem; opacity: 0.95;">Reviens demain pour une nouvelle surprise 💖</div>
+          </div>
+        `;
+        return;
+      }
+      
       isSpinning = true;
       spinBtn.disabled = true;
-      resultDiv.innerHTML = '<div class="result-title">La roue tourne... 🎰</div><div class="result-text">La magie opère !</div>';
+      resultDiv.innerHTML = '<div class="result-title">La roue tourne... 🎰</div><div class="result-text">Prépare-toi !</div>';
 
       const spins = 5 + Math.random() * 3;
       const randomIndex = Math.floor(Math.random() * items.length);
@@ -440,10 +415,19 @@
         
         resultDiv.innerHTML = resultHTML;
         
+        localStorage.setItem(STORAGE_KEY, new Date().toISOString());
+        
         isSpinning = false;
         spinBtn.disabled = false;
+        spinBtn.textContent = '✅ Déjà tourné aujourd\'hui';
+        spinBtn.style.opacity = '0.6';
       }, 5000);
     });
+
+    if (!canSpinToday()) {
+      spinBtn.textContent = 'Reviens demain 💕';
+      spinBtn.disabled = true;
+    }
   </script>
 </body>
 </html>
